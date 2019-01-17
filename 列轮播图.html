@@ -1,0 +1,160 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+        }
+
+        #container {
+            margin: 100px auto;
+            height: 291px;
+            width: 750px;
+            position: relative;
+        }
+
+        ul {
+            list-style: none;
+            display：none;
+        }
+
+        #btn-box li {
+            float: left;
+            width: 20px;
+            height: 20px;
+            background: rgba(0, 0, 0, 0.5);
+            margin-right: 5px;
+            color: #fff;
+            text-align: center;
+            line-height: 20px;
+            font-size: 14px;
+            border-radius: 5px;
+            cursor: pointer;
+
+        }
+
+        #box-image img {
+            display: none;
+        }
+
+        #box-image .active {
+            display: block;
+        }
+
+        #btn-box .select {
+            background: red;
+        }
+
+        #btn-box {
+            position: absolute;
+            right: 10px;
+            bottom: 10px;
+        }
+
+        #net-box li {
+            float: left;
+            width: 20px;
+            height: 20px;
+            background: rgba(0, 0, 0, 0.5);
+            margin-right: 5px;
+            color: #fff;
+            text-align: center;
+            line-height: 20px;
+            font-size: 14px;
+            border-radius: 5px;
+            cursor: pointer;
+        }
+
+        #net-box {
+            position: absolute;
+            left: 10px;
+            bottom: 10px;
+        }
+    </style>
+</head>
+
+<body>
+    <div id='container'>
+        <div id='box-image'>
+            <img class='active' src='img/1.jpg' alt="">
+            <img src='img/2.jpg' alt="">
+            <img src='img/3.jpg' alt="">
+            <img src='img/4.jpg' alt="">
+            <img src='img/5.jpg' alt="">
+
+        </div>
+        <div>
+            <ul id='btn-box'>
+                <li class="select">1</li>
+                <li>2</li>
+                <li>3</li>
+                <li>4</li>
+                <li>5</li>
+            </ul>
+            <ul id='net-box'>
+                <li id="back">&lt;</li>
+                <li id='next'>&gt;</li>
+            </ul>
+        </div>
+    </div>
+    <script>
+        var oContainer=document.getElementById('container');
+        var aBox = document.getElementById('btn-box')
+        var oLi = aBox.getElementsByTagName('li');
+        var oImage = document.getElementsByTagName('img');
+        var aNext = document.getElementById('next');
+        var aBack = document.getElementById('back');
+        var now = 0;
+        for (var i = 0; i < oLi.length; i++) {
+            oLi[i].index = i;
+            oLi[i].onmouseover = function () { change(this.index); 
+            now=this.index;}
+       
+
+        }
+        aNext.onclick = function () {
+            now++;
+            if (now ==oImage.length ) {
+                now = 0;
+            }
+            change(now);
+
+        }
+        aBack.onclick = function () {
+            now--;
+            if (now == -1) {
+                now =oImage.length-1;
+            }
+            change(now);
+
+        }
+        function change(a) {
+
+            for (var j = 0; j < oLi.length; j++) {
+                oLi[j].className = '';
+                oImage[j].className = '';
+            }
+            oLi[a].className = 'select';
+            oImage[a].className = 'active';
+        }
+      run();
+      oContainer.onmouseover=function(){
+          clearInterval(timer);
+      }
+      oContainer.onmouseout=function(){
+        run();
+      }
+      function run(){
+        timer=  setInterval(function(){aNext.onclick()},1000);
+      }
+
+    </script>
+</body>
+
+</html>
