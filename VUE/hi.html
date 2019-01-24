@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <style>
+        li { list-style: none;
+            background: green;
+            margin-top: 5px;
+            padding: 20px;
+        }
+        .active{
+            background: red;
+        }
+        #sss{
+            text-align: right;
+        }
+        li span{
+            float: right;
+        }
+    </style>
+</head>
+
+<body>
+    <div id="app">
+        <h1>services</h1>
+        <ol>
+            <li @click='change(obj)'  v-for='obj in shangpin' :class="{active:obj.isActive}">{{obj.name}}
+
+
+               <span>{{obj.price}}</span> </li>
+        </ol>
+        total:<div id="sss"> <span>{{total()}}</span></div>
+      
+    </div>
+    <script src="vue.js"></script>
+    <script>
+        var vm = new Vue({
+            el: '#app',
+            data: {
+                shangpin: [{ name: 'aaa', price: 123,isActive:false}, { name: 'aaa', price: 123,isActive:false }, { name: 'aaa', price: 123,isActive:false }, { name: 'aaa', price: 123,isActive:false}, { name: 'aaa', price: 123,isActive:false}]
+               
+
+            },
+            methods: {
+                change(obj) {
+                   obj.isActive=!obj.isActive; 
+                },
+                total()
+                {
+                 let count=0;
+                 this.shangpin.forEach(function(obj,index) {
+                     if(obj.isActive)
+                     count+=obj.price;
+                 });
+                return count;
+                }
+            },
+        })
+
+
+
+
+
+    </script>
+</body>
+
+</html>

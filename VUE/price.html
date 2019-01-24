@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+
+<body>
+    <div id="app">
+        <div>
+            是否需要额外付费设施：
+            <input type="checkbox" v-model='isCheck' @click='del()'>
+            <ul v-if='isCheck'>
+                <li v-for='o in List'>{{o.name}} ({{o.price}}) <input type="checkbox" v-model='List1' :value='o'></li>
+            </ul>
+        </div>
+        <div>
+            订单费用信息
+            <ul>
+                <li v-for='o in List1'>{{o.name}} ({{o.price}})</li>
+            </ul>
+        </div>
+        <div>
+            总金额：{{pric()}}
+        </div>
+    </div>
+    <script src="vue.js"></script>
+    <script>
+        var vm = new Vue({
+            el: "#app",
+            data: {
+                isCheck: false,
+                List: [{
+                    name: '沙发', price: 100
+                },
+                { name: '床', price: 200 },
+                {
+                    name: 'wifi', price: 30
+                }],
+                List1: [{ name: '群力花园豪华型', price: 400 }
+                ]
+            },
+            methods: {
+                pric(){
+                    let count = 0;
+                    // 遍历所有商品 找到被勾选的 价格相加
+                    this.List1.forEach(function(obj,index){
+                            count+= obj.price;
+                        }
+                    )
+                    return count;
+                },
+                del(){
+                    this.List1.splice(1);
+                }
+            },
+
+        })
+
+
+
+
+    </script>
+</body>
+
+</html>

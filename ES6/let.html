@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+
+<body>
+    <script>
+     class chengxu{
+         constructor(name,age)
+         {
+             this.name=name;
+             this.age=age;
+         }
+         say(){
+             console.log(this.name);
+         }
+     }
+     var a= new chengxu('陈衬义',18);
+     console.log(a);
+     a.say();
+     class son extends chengxu{
+         constructor(name,age,color)
+         {
+             super(name,age);
+             this.shirt=color;
+         }
+         say(){
+             console.log(this.shirt);
+         }
+         static hi(){
+             console.log('dsfs');
+         }
+     }
+     var b= new son('ccy',19,'green');
+     console.log(b);
+     b.say();
+     son.hi();
+
+    </script>
+</body>
+
+</html>

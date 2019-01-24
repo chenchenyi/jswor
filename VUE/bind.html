@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+<style>
+.active{
+    color: red;
+
+}
+
+
+</style>
+
+<body>
+    <div id="app">
+        <input type='text' v-model='msg'>
+        <button @click='add()'>add</button>
+        <div >
+            <ul>
+                <li v-for='(obj,index) in List' :class="{active:obj.isA}" @click='change(obj)' >
+                    {{obj.val}}
+                    <button @click='del(index)'>del</button>
+                </li>
+            
+           </ul>
+        </div>
+    </div>
+    <script src='vue.js'></script>
+    <script>
+        var vm = new Vue({
+            el: "#app",
+            data: {
+                msg:'',
+                List:[]
+            },
+            methods: {
+                add() {
+                    this.List.push({
+                        val:this.msg,
+                        isA:false
+                    }),
+                    this.msg='';
+                    
+
+                },
+                del(index){
+                    
+                this.List.splice(index,1)
+                       
+                },
+                change(obj)
+                {
+                obj.isA=!obj.isA;
+                },
+                filter(){
+                    22
+                }
+            },
+
+
+        })
+
+    </script>
+
+</body>
+
+</html>
