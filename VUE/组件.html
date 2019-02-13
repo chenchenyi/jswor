@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+<body>
+    <div id="app">
+        <zujian name='sf' age=20></zujian>
+        <zujian name='fff' age=200></zujian>
+
+    </div>
+    <script src=vue.js></script>
+    <script type="text/template" id="zu">
+    <div>
+        <h1>{{name}}</h1>
+        <p>{{age}}</p>
+    </div>
+</script>
+    <script>
+    var vm = new Vue({
+        el:'#app',
+        data:{
+
+        },
+        components:{
+            'zujian':{
+                template:'#zu',
+                props:['name','age']
+            }
+        }
+    })
+    
+    
+    </script>
+</body>
+</html>
