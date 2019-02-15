@@ -1,9 +1,6 @@
 <template>
     <div>
-        我是Mine
-        {{$route.params}}
-        ----
-        {{$route.params.id}}
+        图片
     </div>
 </template>
 

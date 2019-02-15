@@ -1,31 +1,67 @@
 <template>
   <div id="app">
-    <div id="nav">
-      <router-link to="/">Home</router-link> |
-      <router-link to="/about">About</router-link>
+    <c-header :obj='obj'></c-header>
+    <div id="content">
+      <router-view></router-view>
     </div>
-    <router-view/>
+    <c-footer :menu="menu" @changeBg='color' ></c-footer>
   </div>
 </template>
+<script>
+import CHeader from "@/components/CHeader.vue";
+import CFooter from "@/components/CFooter.vue";
 
+export default {
+  data() {
+    return {
+      menu: [
+        {
+          path: "/movie",
+          name: "电影",
+          bgColor:'pink'
+        },
+        {
+          path: "/book",
+          name: "图书",
+           bgColor:'blue'
+        },
+        {
+          path: "/picture",
+          name: "图片",
+           bgColor:'green'
+        },
+        {
+          path: "/music",
+          name: "音乐",
+           bgColor:'yellow'
+        }
+      ],
+      obj: {path:"/movie",
+           name:"电影",
+           bgColor:"pink"}
+    };
+  },
+  components: {
+    CHeader,
+    CFooter
+  },
+  methods: {
+    color(obj){
+this.obj=obj;
+    }
+    
+  },
+ created(){
+    let result=this.menu.filter((obj,index)=>{
+      return obj.path==this.$route.path;
+    });
+    if(result.length)
+    this.obj=result[0];
+  }
+};
+</script>
 <style>
-#app {
-  font-family: 'Avenir', Helvetica, Arial, sans-serif;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
-  text-align: center;
-  color: #2c3e50;
-}
-#nav {
-  padding: 30px;
-}
-
-#nav a {
-  font-weight: bold;
-  color: #2c3e50;
-}
-
-#nav a.router-link-exact-active {
-  color: #42b983;
+#content {
+  margin: 1rem 0;
 }
 </style>

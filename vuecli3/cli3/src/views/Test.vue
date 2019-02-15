@@ -1,9 +1,9 @@
 <template>
     <div>
-        我是Test
+        hahahahaha 
         <router-link to="/a">A</router-link> |
-      <router-link to="/b">B</router-link>
-      <router-view/>
+        <router-link to="/b">B</router-link>
+        <router-view/>
     </div>
 </template>
 

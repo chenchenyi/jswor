@@ -1,9 +1,6 @@
 <template>
     <div>
-        我是Mine
-        {{$route.params}}
-        ----
-        {{$route.params.id}}
+        电影
     </div>
 </template>
 

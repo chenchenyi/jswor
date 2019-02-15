@@ -1,9 +1,8 @@
 <template>
     <div>
-        我是Mine
-        {{$route.params}}
-        ----
-        {{$route.params.id}}
+        <h1>
+            404 
+        </h1>
     </div>
 </template>
 
