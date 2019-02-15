@@ -4,7 +4,7 @@
     <div id="content">
       <router-view></router-view>
     </div>
-    <c-footer :menu="menu" @changeBg='color' ></c-footer>
+    <c-footer :menu="menu" @changeBg='color' :color="obj.bgColor" ></c-footer>
   </div>
 </template>
 <script>

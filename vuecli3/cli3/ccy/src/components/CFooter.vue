@@ -1,5 +1,5 @@
 <template>
-  <div id="footer" :style='{background:color.bgColor}'>
+  <div id="footer" :style='{background:color}'>
     <ul>
       <li v-for="(obj,index) in menu" :key="index">
                 <router-link :to="obj.path"  @click.native='change(obj)'>{{obj.name}}</router-link>
@@ -10,13 +10,11 @@
 
 <script>
 export default {
-  data(){return{
-  bg:''
-  }},
+ 
   props:['menu','color'],
   methods: {
     change(obj){
-    this.bg=obj.bgColor;
+    
     this.$emit('changeBg',obj);
     
     }
