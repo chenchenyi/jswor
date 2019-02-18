@@ -1,62 +1,54 @@
 <template>
   <div id="app">
-    <c-header :obj='obj'></c-header>
-    <div id="content">
-      <router-view></router-view>
-    </div>
-    <c-footer :menu="menu" @changeBg='color' :color="obj.bgColor" ></c-footer>
+      <c-header></c-header>
+      <div id="content">
+          <router-view></router-view>
+      </div>
+      <c-footer :menu="menu"></c-footer>
   </div>
 </template>
 <script>
 import CHeader from "@/components/CHeader.vue";
 import CFooter from "@/components/CFooter.vue";
-
+import {mapMutations} from "vuex";
 export default {
-  data() {
+  data(){
     return {
-      menu: [
-        {
-          path: "/movie",
-          name: "电影",
-          bgColor:'pink'
-        },
-        {
-          path: "/book",
-          name: "图书",
-           bgColor:'blue'
-        },
-        {
-          path: "/picture",
-          name: "图片",
-           bgColor:'green'
-        },
-        {
-          path: "/music",
-          name: "音乐",
-           bgColor:'yellow'
-        }
-      ],
-      obj: {path:"/movie",
+       menu:[
+         {
+           path:"/movie",
            name:"电影",
-           bgColor:"pink"}
-    };
+           bgColor:"#ff0036"
+         },
+         {
+           path:"/music",
+           name:"音乐",
+           bgColor:"#e9f460"
+         },{
+           path:"/book",
+           name:"书籍",
+           bgColor:"#96c2f1"
+         },{
+           path:"/photo",
+           name:"图片",
+           bgColor:"#4abce8"
+         }
+       ]
+    }
   },
   components: {
     CHeader,
     CFooter
   },
-  methods: {
-    color(obj){
-this.obj=obj;
-    }
-    
-  },
- created(){
-    let result=this.menu.filter((obj,index)=>{
-      return obj.path==this.$route.path;
-    });
-    if(result.length)
-    this.obj=result[0];
+  methods:mapMutations(["change"]),
+  created () {
+      let result = this.menu.filter((obj,index)=>{
+        return obj.path == this.$route.path;
+      });
+      if(result.length){
+        // 修改state中存的name color 改成result[0].name result[0].bgColor
+        this.change(result[0]);
+      }
   }
 };
 </script>
