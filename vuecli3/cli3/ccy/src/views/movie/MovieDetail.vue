@@ -1,7 +1,8 @@
 <template>
     <div v-if="isShow">
-        <!-- {{$route.params.movieId}}  -->
+        {{$route.params.movieId}}
         {{movieDetail.title}}
+        
               <img :src='movieDetail.images.small' alt="" >  <!-- {{movieDetail.images.small}} -->
     </div>
 </template>

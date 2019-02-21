@@ -1,0 +1,92 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+
+<body>
+    <div id="root">
+    </div>
+    <script src="react.development.js"></script>
+    <script src="react-dom.development.js"></script>
+    <script src="browser.min.js"></script>
+    <script type="text/babel">
+    class Add extends React.Component{
+        constructor(params){
+           super(params);
+           this.add=this.add.bind(this);
+          
+
+       } 
+        add(){
+            if(this.myInput.value)
+            {this.props.addH(this.myInput.value);
+                this.myInput.value='';
+            }
+            
+        }
+    render(){
+    return(
+    <div>
+        <input type="text" ref={input=>{this.myInput=input}}/>
+        <button onClick={this.add}>add</button>
+    </div>
+    )
+    }
+    }
+    class List extends React.Component{
+    render(){
+    return(
+    <div>
+        <ul>
+                <ul>
+                        {
+                            this.props.datas.map(function(val,index){
+                                return <li key={index}>{val}</li>
+                            })
+                        }
+                    </ul>
+        </ul>
+    </div>
+    )
+
+    }
+    }
+    class Main extends React.Component{
+       constructor(params){
+           super(params);
+           this.addH=this.addH.bind(this);
+           this.state={
+               datas:['吃饭','睡觉','打代码']
+           }
+
+       } 
+       addH(v){
+           
+           let datas=[...this.state.datas];
+           datas.push(v);
+           this.setState({
+               datas
+           })
+
+       }
+    render(){
+    return(
+    <div>
+        <h1>简单的todolist</h1>
+        <Add addH={this.addH}></Add>
+        <List datas={this.state.datas}></List>
+    </div>
+    )
+
+    }
+    }
+ReactDOM.render(<Main></Main>,document.getElementById('root'))
+</script>
+</body>
+
+</html>

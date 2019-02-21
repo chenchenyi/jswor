@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+<body>
+        <div id="root">
+            </div>
+            <script src="react.development.js"></script>
+            <script src="react-dom.development.js"></script>
+            <script src="browser.min.js"></script>
+            <script type="text/babel">          
+class Main extends React.Component{
+    constructor(params){
+super(params);
+this.addH=this.addH.bind(this);
+this.state={
+    num:100,
+    numA:100,
+    numB:80
+}
+    }
+    addH(v,n){
+       n=parseInt(n);
+        if(this.state.num>=n)
+        {this.setState({
+        num:this.state.num-n,
+        ['num'+v]:this.state['num'+v]+n,
+        });}
+        else
+        alert('没有兵可调');
+    }
+    render(){
+        return( <div>
+        <h1>剩余士兵数量{this.state.num}</h1>
+        <Sod addH={this.addH} name='A' number={this.state.numA}></Sod>
+        <Sod addH={this.addH} name='B' number={this.state.numB}></Sod>
+        </div>)
+      
+    }
+}
+class Sod extends React.Component{
+    constructor(params){
+super(params);
+
+    }
+    render(){
+        return(  <div>
+        <h2>将军{this.props.name}有士兵：{this.props.number}</h2>
+        <input type='text' ref={input=>{this.myinput=input}}/>
+        <button onClick={()=>{this.props.addH(this.props.name,this.myinput.value)}}>调兵</button></div>)
+      
+
+    }
+}
+ReactDOM.render(<Main></Main>,document.getElementById('root'));
+    
+
+
+
+
+            </script>
+</body>
+</html>
