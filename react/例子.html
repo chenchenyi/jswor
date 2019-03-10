@@ -1,0 +1,143 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <style>
+        .active{
+            background: #ff0000;
+        }
+    </style>
+</head>
+<body>
+    <div id="root"></div>
+    <script src="react.development.js"></script>
+    <script src="react-dom.development.js"></script>
+    <script src="browser.min.js"></script>
+    <script type="text/babel">
+   
+ class Main extends React.Component {
+    constructor(params){
+            super(params);
+            this.state={
+                list:[{name:'吃饭',id:1,
+                isActive:false},{name:'睡觉',id:2,isActive:false},{name:'打豆豆',id:3,isActive:true}],
+                Newlist:[{name:'吃饭',id:1,
+                isActive:false},{name:'睡觉',id:2,isActive:false},{name:'打豆豆',id:3,isActive:true}]
+            }
+            this.addH=this.addH.bind(this);
+            this.get=this.get.bind(this);
+            this.delete=this.delete.bind(this);
+            this.search=this.search.bind(this);
+        }
+        delete(id){
+            let list=this.state.list.filter((obj)=>{return obj.id!=id})
+            this.setState({
+                list,
+                Newlist:list
+            })
+
+        }
+        addH(v){
+            let list=[...this.state.list];
+            list.push({name:v,id:(new Date()).getTime(),isActive:false});
+            this.setState({
+                list,
+                Newlist:list
+            })
+        }
+        get(id){
+           // todos 数组中id是参数id的isActive = !isActive
+                // 找到数组中id = 参数id 的元素的索引index
+                let index = this.state.list.findIndex(function(obj,index){
+                    return obj.id == id
+                })
+                let list = [...this.state.list];
+                // 2.修改数组中索引是index的元素的isActive  = ！isActive
+                list[index].isActive = !list[index].isActive;
+                // 3 修改state中的todos
+                this.setState({
+                    list,
+                Newlist:list
+                });
+
+        }
+        search(val){
+            let Newlist=this.state.list.filter((obj)=>{return obj.name.includes(val)})
+            this.setState({
+                Newlist
+            })
+            
+        }
+      render() {
+        return (
+          <div>
+            <h1>todoList</h1>
+           <Search search={this.search}></ Search>
+            <Add addH={this.addH}></Add>
+            <List list={this.state.Newlist} get={this.get} delete={this.delete}></List>
+          </div>
+        )
+      }
+    }
+    class Search extends React.Component {
+      render() {
+        return (
+          <div>
+            搜索：<input type='text' onChange={(e)=>{this.props.search(e.target.value)}}/>
+          </div>
+        )
+      }
+    }
+    class Add extends React.Component {
+        constructor(params){
+            super(params);
+            this.add=this.add.bind(this);
+        }
+       
+        add(){
+            if(this.myInput.value)
+          {this.props.addH(this.myInput.value);
+            this.myInput.value='';
+        }  
+        }
+      render() {
+        return (
+          <div>
+            添加：<input type='text' ref={input=>{this.myInput=input}}/>
+            <button onClick={this.add}>保存任务</button>
+          </div>
+        )
+      }
+    }
+    class List extends React.Component {
+        constructor(params){
+            super(params);
+            
+        }
+      render() {
+        return (
+          <div>
+            <ul> 
+                {this.props.list.map((val,index)=>{
+                    return(
+                        <li key={val.id} className={ val.isActive? 'active':''}>
+                        <input type='checkbox' defaultChecked={val.isActive} onClick={()=>{this.props.get(val.id);}}/>
+                        <span> {val.name}</span>
+                       <button onClick={()=>{this.props.delete(val.id);}}>删除</button>
+                        </li>
+                        ) 
+                })
+            }
+                </ul>
+          </div>
+        )
+      }
+    }
+    ReactDOM.render(<Main></Main>,document.getElementById('root'));
+    
+    </script>
+</body>
+</html>

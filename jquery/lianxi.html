@@ -5,11 +5,24 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <title>Document</title>
+    <style>
+      #app{
+          background: #ff0036;
+      }
+    
+    </style>
 </head>
 <body>
+    <div id="app">
+hf
+    </div>
     <script src="jquery-1.12.4.js"></script>
     <script>
-
+      var oDiv=document.getElementById('app');
+      oDiv.style.background='green';
+      //$('#app').css('background','yellow');
+      //$('#app').get(0).innerHTML='11111';
+    $(oDiv).html('1233355');
     </script>
 </body>
 </html>
