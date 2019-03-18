@@ -1,9 +1,8 @@
 <template>
     <div v-if="isShow">
-        {{$route.params.movieId}}
-        {{movieDetail.title}}
+       <h3 class="title"> {{movieDetail.title}}</h3>
+       <p>简介：{{movieDetail.summary}}</p> 
         
-              <img :src='movieDetail.images.small' alt="" >  <!-- {{movieDetail.images.small}} -->
     </div>
 </template>
 
@@ -29,5 +28,7 @@
 </script>
 
 <style scoped>
-
+.title{
+    text-align: center;
+}
 </style>

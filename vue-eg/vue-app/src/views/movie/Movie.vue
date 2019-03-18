@@ -8,11 +8,11 @@
                     <p>
                         <span v-for="(actor,index) in obj.casts" :key="index">{{actor.name}}|</span>
                     </p>
-                    <p>{{obj.collect_count}}已观看</p>
+                    <p>{{obj.collect_count}} 已观看</p>
                     <p>年份：{{obj.year}}</p>
-                    <p>
+                    <p> 类型：
                         <span v-for="(type,index) in obj.genres" :key="index">
-                            {{type}}
+                           {{type}}
                         </span>
                     </p>
                 </div>
@@ -38,11 +38,11 @@
             this.getMovie()
             window.onscroll = () => {
                 // 滚动条滚动的高度
-                console.log(document.documentElement.scrollTop);
-                // 可视区的高度
-                console.log(document.documentElement.clientHeight);
-                // 整个滚动区的高度
-                console.log(document.documentElement.scrollHeight);
+                // console.log(document.documentElement.scrollTop);
+                // // 可视区的高度
+                // console.log(document.documentElement.clientHeight);
+                // // 整个滚动区的高度
+                // console.log(document.documentElement.scrollHeight);
 //如果 scrollTop 到底的时候取到的是小数 
 // Math.abs(document.documentElement.scrollTop +document.documentElement.clientHeight - document.documentElement.scrollHeight) < 1
                 if(  Math.abs(document.documentElement.scrollTop +document.documentElement.clientHeight - document.documentElement.scrollHeight) < 1 && !this.isBottom){
@@ -54,12 +54,13 @@
             getMovie () {
                 // 豆掰接口的访问方式
                 this.isShow = true;
-                Axios.get("https://bird.ioliu.cn/v1?url=https://api.douban.com/v2/movie/top250?start="+this.movieList.length+"&count=10")
+                Axios.get("https://bird.ioliu.cn/v1?url=https://api.douban.com/v2/movie/in_theaters?start="+this.movieList.length+"&count=10")
                 // 本地json模拟
                 // Axios.get("/movie"+this.movieList.length+".json")
                 .then((result)=>{
                     this.movieList = [...this.movieList,...result.data.subjects];
                     this.isShow = false;
+                    // console.log(this.movieList);
                     if(this.movieList.length == result.data.total){
                         this.isBottom = true;
                     }
