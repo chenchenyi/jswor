@@ -2,7 +2,7 @@
     <div>
         <ul class="container">
             <li v-for="(obj,index) in movieList" :key="index" @click="goDetail(obj.id)">
-                <img :src="obj.images.small" alt="">
+                <img :src="'https://images.weserv.nl/?url='+obj.images.small" alt="">
                 <div class="info">
                     <h3>{{obj.title}}</h3>
                     <p>
@@ -54,7 +54,7 @@
             getMovie () {
                 // 豆掰接口的访问方式
                 this.isShow = true;
-                Axios.get("https://bird.ioliu.cn/v1?url=https://api.douban.com/v2/movie/in_theaters?start="+this.movieList.length+"&count=10")
+                Axios.get("https://bird.ioliu.cn/v1?url=https://douban.uieee.com/v2/movie/in_theaters?start="+this.movieList.length+"&count=10")
                 // 本地json模拟
                 // Axios.get("/movie"+this.movieList.length+".json")
                 .then((result)=>{
